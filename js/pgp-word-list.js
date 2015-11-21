@@ -272,19 +272,16 @@ var PGPPassPhrase = {
   // Generate a pass phrase of X words long. It will handle the odd/even wordlist
   // choice automatically for you.
   generatePhrase: function(count) {
-    var passphrase = '';
+    var phrase_words = [];
     for (j = 1; j <= count; j++) {
       if (j%2 == 0) {
-        var pgp_word = PGPPassPhrase.randomPGPWord(false);
+        phrase_words.push(PGPPassPhrase.randomPGPWord(false));
       } else {
-        var pgp_word = PGPPassPhrase.randomPGPWord(true);
+        phrase_words.push(PGPPassPhrase.randomPGPWord(true));
       }
-
-      passphrase += pgp_word + ' ';
     }
 
-    // Return everything but the last character, which is a trailing space
-    return passphrase.substring(0, passphrase.length-1);
+    return passphrase.join(' ');
   },
 
   // Toggle display of the flappers used in the stylized view with the plain text
