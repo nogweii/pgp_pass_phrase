@@ -324,15 +324,19 @@ var PGPPassPhrase = {
     });
   },
 
+  incrementer: 0,
+
   setupProgressBar: function() {
-    PGPPassPhrase.incrementer = setInterval(PGPPassPhrase.progressInc, 1000);
-    NProgress.configure({ easing: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)', speed: 999, showSpinner: false, trickle: false, minimum: 0.01, parent: '#phrase_container' });
-    NProgress.start();
+    if (!(PGPPassPhrase.incrementer > 0)) {
+      PGPPassPhrase.incrementer = setInterval(PGPPassPhrase.progressInc, 1000);
+      NProgress.configure({ easing: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)', speed: 999, showSpinner: false, trickle: false, minimum: 0.01, parent: '#phrase_container' });
+      NProgress.start();
+    }
   },
 
   // Generate the pass phrase & update the DOM
   fillinPassPhrase: function() {
-    clearInterval(PGPPassPhrase.incrementer);
+    console.log('generating new passpharse');
     var phrase = PGPPassPhrase.generatePhrase(7);
     $id('phrase_words').value = phrase;
     $id('phrase_text').innerHTML = phrase;
@@ -348,8 +352,9 @@ var PGPPassPhrase = {
   progressInc: function() {
     if (NProgress.status + PGPPassPhrase.incrementRatio >= 1.0) {
       NProgress.done();
-      clearInterval(PGPPassPhrase.incrementer);
       PGPPassPhrase.fillinPassPhrase();
+      clearInterval(PGPPassPhrase.incrementer);
+      PGPPassPhrase.incrementer = 0;
     } else {
       NProgress.inc(PGPPassPhrase.incrementRatio);
     }
