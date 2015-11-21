@@ -63,3 +63,8 @@ button:active, button.active {
 	box-shadow: 0 5px #27496d;
 	transform: translateY(5px);
 }
+
+#phrase_container {
+  /* add some whitespace for the progress bar below the passphrase */
+  padding-bottom: 2px;
+}

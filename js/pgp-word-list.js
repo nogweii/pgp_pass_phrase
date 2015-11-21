@@ -326,7 +326,7 @@ var PGPPassPhrase = {
 
   setupProgressBar: function() {
     PGPPassPhrase.incrementer = setInterval(PGPPassPhrase.progressInc, 1000);
-    NProgress.configure({ easing: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)', speed: 999, showSpinner: false, trickle: false, minimum: 0.01 });
+    NProgress.configure({ easing: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)', speed: 999, showSpinner: false, trickle: false, minimum: 0.01, parent: '#phrase_container' });
     NProgress.start();
   },
 
