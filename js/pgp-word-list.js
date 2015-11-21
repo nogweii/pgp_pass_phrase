@@ -324,46 +324,36 @@ var PGPPassPhrase = {
     });
   },
 
-  incrementer: 0,
+  // How many ms between making new a new pass phrase automatically
+  regenerationDelay: 10000,
 
   setupProgressBar: function() {
-    if (!(PGPPassPhrase.incrementer > 0)) {
-      PGPPassPhrase.incrementer = setInterval(PGPPassPhrase.progressInc, 1000);
-      NProgress.configure({ easing: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)', speed: 999, showSpinner: false, trickle: false, minimum: 0.01, parent: '#phrase_container' });
-      NProgress.start();
-    }
+    NProgress.start();
+    NProgress.set(0.999); // Don't set immediately to 1, just very close to it
+    $id('nprogress').addEventListener('transitionend', PGPPassPhrase.fillinPassPhrase);
   },
 
   // Generate the pass phrase & update the DOM
   fillinPassPhrase: function() {
     console.log('generating new passpharse');
+    NProgress.remove();
+    NProgress.configure({ speed: 100 });
+    NProgress.set(0);
+    NProgress.configure({ speed: PGPPassPhrase.regenerationDelay });
+
     var phrase = PGPPassPhrase.generatePhrase(7);
     $id('phrase_words').value = phrase;
     $id('phrase_text').innerHTML = phrase;
     // Delete the current flapper if it exists
     if (document.getElementsByClassName('flapper')[0])
       document.getElementsByClassName('flapper')[0].remove();
-    $('#phrase_words').flapper({width: phrase.length, chars_preset: 'alpha', timing: 250, on_anim_end: PGPPassPhrase.setupProgressBar}).val(phrase).change();
-    NProgress.set(0.01);
-  },
-
-  // Every second the progress bar will increment this much, up to 1.0
-  incrementRatio: 0.03,
-
-  progressInc: function() {
-    if (NProgress.status + PGPPassPhrase.incrementRatio >= 1.0) {
-      NProgress.done();
-      PGPPassPhrase.fillinPassPhrase();
-      clearInterval(PGPPassPhrase.incrementer);
-      PGPPassPhrase.incrementer = 0;
-    } else {
-      NProgress.inc(PGPPassPhrase.incrementRatio);
-    }
+    $('#phrase_words').flapper({width: phrase.length, chars_preset: 'alpha', on_anim_end: PGPPassPhrase.setupProgressBar}).val(phrase).change();
   }
 
 }
 
 $(document).ready(function() {
+  NProgress.configure({ easing: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)', speed: PGPPassPhrase.regenerationDelay, showSpinner: false, trickle: false, minimum: 0, parent: '#phrase_container' });
   PGPPassPhrase.fillinPassPhrase();
   PGPPassPhrase.setupClipboard();
   $id('plain_text_btn').addEventListener('click', PGPPassPhrase.togglePlainText);
