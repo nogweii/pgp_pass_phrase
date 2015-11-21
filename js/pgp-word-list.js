@@ -325,7 +325,7 @@ var PGPPassPhrase = {
   },
 
   // How many ms between making new a new pass phrase automatically
-  regenerationDelay: 10000,
+  regenerationDelay: 30000,
 
   setupProgressBar: function() {
     NProgress.start();
