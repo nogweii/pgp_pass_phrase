@@ -281,7 +281,7 @@ var PGPPassPhrase = {
       }
     }
 
-    return passphrase.join(' ');
+    return phrase_words.join(' ');
   },
 
   // Toggle display of the flappers used in the stylized view with the plain text
