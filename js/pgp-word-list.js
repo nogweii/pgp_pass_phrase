@@ -335,6 +335,7 @@ var PGPPassPhrase = {
 
   // Generate the pass phrase & update the DOM
   fillinPassPhrase: function() {
+    clearInterval(PGPPassPhrase.incrementer);
     var phrase = PGPPassPhrase.generatePhrase(7);
     $id('phrase_words').value = phrase;
     $id('phrase_text').innerHTML = phrase;
