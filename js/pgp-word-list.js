@@ -344,6 +344,7 @@ var PGPPassPhrase = {
     if (document.getElementsByClassName('flapper')[0])
       document.getElementsByClassName('flapper')[0].remove();
     $('#phrase_words').flapper({width: phrase.length, chars_preset: 'alpha', timing: 250, on_anim_end: PGPPassPhrase.setupProgressBar}).val(phrase).change();
+    NProgress.set(0.01);
   },
 
   // Every second the progress bar will increment this much, up to 1.0
