@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>PGP Pass Phrase</title>
+
+    <meta charset="utf-8" />
+
+    <!-- I'm lazy but I would like to avoid jQuery since this is supposed to be
+         super simple/lightweight, but Flapper requires it. Oh well. -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jshashtable.js"></script>
+    <script src="js/jquery.transform-0.9.3.min.js"></script>
+    <script src="js/jquery.flapper.js"></script>
+    <script src="js/clipboard.js"></script>
+    <script src="js/nprogress.js"></script>
+    <script src="js/pgp-word-list.js"></script>
+
+    <link href="css/normalize.css" type="text/css" rel="stylesheet" />
+    <link href="css/flapper.css" type="text/css" rel="stylesheet" />
+    <link href="css/nprogress.css" type="text/css" rel="stylesheet" />
+    <link href="css/pgp-word-list.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+
+    <div class='flex-contain'>
+      <h1>Passphrase generator</h1>
+
+      <div id='phrase_container'>
+        <input type="text" value="words" id="phrase_words" class='XS' />
+        <!-- And the dynamically created <div>s from flapper -->
+      </div>
+      <span id="phrase_text"></span>
+      <div class='button-row'>
+        <button id='copy_btn'>Copy</button>
+        <button id='plain_text_btn'>Plain text</button>
+        <button id='new_btn'>New</button>
+      </div>
+
+      <p>A really basic web toy, generating a pass phrase comprised of words from the <a href="https://en.wikipedia.org/wiki/PGP_word_list">PGP word list</a>.
+      Made by <a href="https://evaryont.me">Evaryont</a>, with source available
+      on Github.
+      <br />Many thanks to the authors of the
+      <a href="http://jaykayess.com/flapper/">Flapper</a>,
+      <a href="http://clipboardjs.com/">Clipboard.js</a>, and
+      <a href="http://ricostacruz.com/nprogress">NProgress</a> libraries.
+      </p>
+    </div>
+
+  </body>
+</html>

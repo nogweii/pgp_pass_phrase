@@ -1,0 +1,65 @@
+input {
+  display: inline;
+}
+
+div.flapper {
+  display: flex;
+}
+
+#phrase_text {
+  display: none;
+}
+
+html, body {
+  margin: 0; padding: 0;
+}
+
+body {
+  background-color: #F2F2F2;
+}
+
+.flex-contain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+p {
+  margin-top: 12em;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2em;
+}
+
+button {
+	display: inline-block;
+	margin: 0 10px 0 0;
+	padding: 10px 45px;
+	/*font-size: 48px;*/
+	line-height: 1.6;
+	vertical-align: bottom;
+	appearance: none;
+	color: #fff;
+	background-color: #6496c8;
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 10px #27496d;
+}
+button:focus {
+	outline: none
+}
+button:hover, button.hover {
+	background-color: #417cb8;
+}
+button:active, button.active {
+	background-color: #417cb8;
+	box-shadow: 0 5px #27496d;
+	transform: translateY(5px);
+}
