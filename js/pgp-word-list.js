@@ -266,8 +266,16 @@ var PGPPassPhrase = {
   // generating a pass phrase, the words in the odd positions use the second list
   // instead of the first.
   randomPGPWord: function(odd_position) {
-    return PGPPassPhrase.pgp_word_list[Math.floor(Math.random()*256)][odd_position ? 1 : 0];
-  },
+    var objCrypto = window.crypto || window.msCrypto;
+    if (objCrypto && objCrypto.getRandomValues) {
+      var values = new Uint32Array(1);
+      objCrypto.getRandomValues(values);
+      var i = values[1] % 256;
+    } else {
+      var i = Math.floor(Math.random()*256);
+    }
+    return PGPPassPhrase.pgp_word_list[i][odd_position ? 1 : 0];
+  };
 
   // Generate a pass phrase of X words long. It will handle the odd/even wordlist
   // choice automatically for you.
@@ -282,7 +290,7 @@ var PGPPassPhrase = {
     }
 
     return phrase_words.join(' ');
-  },
+  };
 
   // Toggle display of the flappers used in the stylized view with the plain text
   // span. Also update the button label!
@@ -298,7 +306,7 @@ var PGPPassPhrase = {
       $id('phrase_container').style.display = 'none';
       $id('plain_text_btn').innerHTML = 'Stylized';
     }
-  },
+  };
 
   // Do the preparatory work for Clipboard.js
   setupClipboard: function() {
