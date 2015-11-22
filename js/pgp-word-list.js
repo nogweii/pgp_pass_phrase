@@ -266,7 +266,15 @@ var PGPPassPhrase = {
   // generating a pass phrase, the words in the odd positions use the second list
   // instead of the first.
   randomPGPWord: function(odd_position) {
-    return PGPPassPhrase.pgp_word_list[Math.floor(Math.random()*256)][odd_position ? 1 : 0];
+    var objCrypto = window.crypto || window.msCrypto;
+    if (objCrypto && objCrypto.getRandomValues) {
+      var values = new Uint32Array(1);
+      objCrypto.getRandomValues(values);
+      var i = values[0] % 256;
+    } else {
+      var i = Math.floor(Math.random()*256);
+    }
+    return PGPPassPhrase.pgp_word_list[i][odd_position ? 1 : 0];
   },
 
   // Generate a pass phrase of X words long. It will handle the odd/even wordlist
