@@ -275,7 +275,7 @@ var PGPPassPhrase = {
       var i = Math.floor(Math.random()*256);
     }
     return PGPPassPhrase.pgp_word_list[i][odd_position ? 1 : 0];
-  };
+  },
 
   // Generate a pass phrase of X words long. It will handle the odd/even wordlist
   // choice automatically for you.
@@ -290,7 +290,7 @@ var PGPPassPhrase = {
     }
 
     return phrase_words.join(' ');
-  };
+  },
 
   // Toggle display of the flappers used in the stylized view with the plain text
   // span. Also update the button label!
@@ -306,7 +306,7 @@ var PGPPassPhrase = {
       $id('phrase_container').style.display = 'none';
       $id('plain_text_btn').innerHTML = 'Stylized';
     }
-  };
+  },
 
   // Do the preparatory work for Clipboard.js
   setupClipboard: function() {
